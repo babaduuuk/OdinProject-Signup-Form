@@ -1,0 +1,229 @@
+:root {
+  color-scheme: light;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  background-color: #f9fafc;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  --panel-width: clamp(280px, 35vw, 520px);
+  --accent: #596d48;
+  --focus: #4c7ef3;
+  --error: #c94f4f;
+  --input-border: #e5e7eb;
+  --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f9fafc;
+  color: #1f2933;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+.page {
+  display: flex;
+  min-height: 100vh;
+}
+
+.brand-panel {
+  position: relative;
+  flex: 0 0 var(--panel-width);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem clamp(1.5rem, 3vw, 3.5rem);
+  background: url('assets/images/fern-background.svg') center/cover no-repeat;
+  color: #f7f8f4;
+  text-align: center;
+}
+
+.branding {
+  margin-top: clamp(10vh, 12vw, 16vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 2rem;
+  background-color: rgba(8, 26, 12, 0.72);
+  border-radius: 14px;
+  backdrop-filter: blur(2px);
+}
+
+.branding img {
+  width: clamp(72px, 7vw, 120px);
+  height: auto;
+}
+
+.brand-text {
+  font-family: 'Cinzel', 'Times New Roman', serif;
+  font-size: clamp(2.75rem, 6vw, 4.5rem);
+  letter-spacing: 0.4rem;
+  color: #fefcf6;
+}
+
+.asset-credit {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  background-color: rgba(8, 26, 12, 0.52);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin: 0 auto;
+  max-width: 18rem;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(2.5rem, 6vw, 6rem);
+  gap: clamp(2rem, 4vw, 4rem);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), #f9fafc 60%);
+}
+
+.intro {
+  max-width: 48ch;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3a2f;
+}
+
+.intro p:first-of-type {
+  margin-bottom: 0.5rem;
+}
+
+.form-section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: clamp(2rem, 4vw, 3rem);
+}
+
+.form-section h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.45rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #3b4b34;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 1.5rem 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4d5a4e;
+}
+
+.input-group input {
+  font: inherit;
+  font-size: 1rem;
+  padding: 0.7rem 0.85rem;
+  border: 1.5px solid var(--input-border);
+  border-radius: 8px;
+  background-color: #fdfdfc;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.input-group input:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(76, 126, 243, 0.24);
+  background-color: #ffffff;
+}
+
+.input-group input:invalid:not(:focus):not(:placeholder-shown) {
+  border-color: var(--error);
+  background-color: rgba(201, 79, 79, 0.08);
+}
+
+.input-group input::placeholder {
+  color: #9ca3af;
+}
+
+.cta {
+  appearance: none;
+  border: none;
+  padding: 0.9rem 2.5rem;
+  border-radius: 999px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #f7f9f4;
+  background: linear-gradient(135deg, #5f7b4e, #4e633f);
+  cursor: pointer;
+  box-shadow: 0 14px 24px rgba(89, 109, 72, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 28px rgba(89, 109, 72, 0.35);
+}
+
+.cta:active {
+  transform: translateY(1px);
+  box-shadow: 0 10px 20px rgba(89, 109, 72, 0.3);
+}
+
+.login-callout {
+  font-size: 0.95rem;
+  color: #4d5a4e;
+}
+
+@media (max-width: 960px) {
+  .page {
+    flex-direction: column;
+  }
+
+  .brand-panel {
+    flex: none;
+    min-height: 340px;
+    border-bottom-left-radius: 28px;
+    border-bottom-right-radius: 28px;
+  }
+
+  .content {
+    padding: 2.5rem clamp(1.5rem, 5vw, 3.5rem) 3rem;
+  }
+
+  .field-grid {
+    grid-template-columns: minmax(180px, 1fr);
+    gap: 1.25rem;
+  }
+}
