@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up | Odin Project Practice</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="page">
+      <aside class="brand-panel">
+        <div class="branding">
+          <img src="assets/images/odin-logo.svg" alt="Stylized Odin logo" />
+          <span class="brand-text">ODIN</span>
+        </div>
+        <p class="asset-credit">
+          Background illustration created by ChatGPT. Logo inspired by Norse motifs.
+        </p>
+      </aside>
+      <main class="content">
+        <section class="intro">
+          <p>
+            This is not a real online service! You know you need something like
+            this in your life to help you realize your deepest dreams. Sign up
+            now to get started.
+          </p>
+          <p>You know you want to.</p>
+        </section>
+        <section class="form-section">
+          <h2>Let's do this!</h2>
+          <form action="#" method="post" novalidate>
+            <div class="field-grid">
+              <label class="input-group" for="first-name">
+                <span>First name</span>
+                <input
+                  type="text"
+                  id="first-name"
+                  name="first-name"
+                  autocomplete="given-name"
+                  placeholder="Jane"
+                  required
+                />
+              </label>
+              <label class="input-group" for="last-name">
+                <span>Last name</span>
+                <input
+                  type="text"
+                  id="last-name"
+                  name="last-name"
+                  autocomplete="family-name"
+                  placeholder="Doe"
+                  required
+                />
+              </label>
+              <label class="input-group" for="email">
+                <span>Email</span>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  autocomplete="email"
+                  placeholder="jane.doe@example.com"
+                  required
+                />
+              </label>
+              <label class="input-group" for="phone">
+                <span>Phone number</span>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  autocomplete="tel"
+                  placeholder="(555) 123-4567"
+                  pattern="[0-9\-\s\(\)]+"
+                />
+              </label>
+              <label class="input-group" for="password">
+                <span>Password</span>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  placeholder="Enter a strong password"
+                  required
+                  minlength="8"
+                  pattern="(?=.*[A-Za-z])(?=.*\d).{8,}"
+                />
+              </label>
+              <label class="input-group" for="confirm-password">
+                <span>Confirm password</span>
+                <input
+                  type="password"
+                  id="confirm-password"
+                  name="confirm-password"
+                  placeholder="Repeat your password"
+                  required
+                  minlength="8"
+                  pattern="(?=.*[A-Za-z])(?=.*\d).{8,}"
+                />
+              </label>
+            </div>
+            <button type="submit" class="cta">Create Account</button>
+          </form>
+        </section>
+        <p class="login-callout">
+          Already have an account? <a href="#">Log in</a>
+        </p>
+      </main>
+    </div>
+  </body>
+</html>
