@@ -1,0 +1,60 @@
+<svg width="1200" height="1800" viewBox="0 0 1200 1800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="paint0" x1="150" y1="0" x2="1110" y2="1800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#15371F" />
+      <stop offset="0.45" stop-color="#1F4A2B" />
+      <stop offset="1" stop-color="#0E2114" />
+    </linearGradient>
+    <linearGradient id="leaf-light" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#79C08A" stop-opacity="0.92" />
+      <stop offset="1" stop-color="#3F8D55" stop-opacity="0.9" />
+    </linearGradient>
+    <linearGradient id="leaf-dark" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#285F3C" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#12341F" stop-opacity="0.85" />
+    </linearGradient>
+    <filter id="glow" x="-40" y="-40" width="1280" height="1880" filterUnits="userSpaceOnUse">
+      <feGaussianBlur stdDeviation="45" result="blur" />
+    </filter>
+  </defs>
+  <rect width="1200" height="1800" fill="url(#paint0)" />
+  <ellipse cx="280" cy="360" rx="240" ry="380" fill="#1C4529" opacity="0.5" />
+  <ellipse cx="980" cy="520" rx="320" ry="460" fill="#16351F" opacity="0.45" />
+  <ellipse cx="600" cy="1400" rx="520" ry="520" fill="#102116" opacity="0.55" />
+  <g filter="url(#glow)" opacity="0.18">
+    <circle cx="420" cy="520" r="220" fill="#7AD496" />
+    <circle cx="940" cy="820" r="180" fill="#3E7F53" />
+  </g>
+  <g fill="url(#leaf-light)" fill-opacity="0.85">
+    <ellipse cx="320" cy="640" rx="70" ry="220" transform="rotate(-28 320 640)" />
+    <ellipse cx="420" cy="520" rx="64" ry="210" transform="rotate(-8 420 520)" />
+    <ellipse cx="520" cy="412" rx="56" ry="188" transform="rotate(12 520 412)" />
+    <ellipse cx="610" cy="326" rx="48" ry="170" transform="rotate(22 610 326)" />
+    <ellipse cx="700" cy="268" rx="44" ry="150" transform="rotate(34 700 268)" />
+    <ellipse cx="780" cy="248" rx="40" ry="136" transform="rotate(46 780 248)" />
+    <ellipse cx="860" cy="258" rx="36" ry="128" transform="rotate(58 860 258)" />
+  </g>
+  <g fill="url(#leaf-dark)" fill-opacity="0.88">
+    <ellipse cx="260" cy="980" rx="76" ry="240" transform="rotate(28 260 980)" />
+    <ellipse cx="360" cy="1100" rx="70" ry="230" transform="rotate(12 360 1100)" />
+    <ellipse cx="470" cy="1180" rx="64" ry="220" transform="rotate(-4 470 1180)" />
+    <ellipse cx="580" cy="1208" rx="60" ry="208" transform="rotate(-18 580 1208)" />
+    <ellipse cx="690" cy="1186" rx="55" ry="198" transform="rotate(-30 690 1186)" />
+    <ellipse cx="800" cy="1124" rx="50" ry="184" transform="rotate(-44 800 1124)" />
+  </g>
+  <g stroke="#79C08A" stroke-opacity="0.65" stroke-width="5" stroke-linecap="round">
+    <path d="M220 980C260 840 360 730 500 680" />
+    <path d="M500 680C620 632 760 642 880 704" />
+    <path d="M880 704C990 768 1060 872 1088 1008" />
+  </g>
+  <g stroke="#456F4F" stroke-opacity="0.75" stroke-width="5" stroke-linecap="round">
+    <path d="M240 640C332 520 456 440 608 412" />
+    <path d="M608 412C724 392 838 416 932 480" />
+    <path d="M932 480C1024 544 1084 648 1100 800" />
+  </g>
+  <g stroke="#A6E5B8" stroke-opacity="0.5" stroke-width="4" stroke-linecap="round">
+    <path d="M260 980C280 932 320 876 380 824" />
+    <path d="M320 884C372 836 444 796 536 764" />
+    <path d="M536 764C640 732 752 720 868 726" />
+  </g>
+</svg>
