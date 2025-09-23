@@ -46,6 +46,7 @@
                   placeholder="Jane"
                   required
                 />
+                <span class="error-message" aria-live="polite"></span>
               </label>
               <label class="input-group" for="last-name">
                 <span>Last name</span>
@@ -57,6 +58,7 @@
                   placeholder="Doe"
                   required
                 />
+                <span class="error-message" aria-live="polite"></span>
               </label>
               <label class="input-group" for="email">
                 <span>Email</span>
@@ -68,6 +70,7 @@
                   placeholder="jane.doe@example.com"
                   required
                 />
+                <span class="error-message" aria-live="polite"></span>
               </label>
               <label class="input-group" for="phone">
                 <span>Phone number</span>
@@ -78,7 +81,9 @@
                   autocomplete="tel"
                   placeholder="(555) 123-4567"
                   pattern="[0-9\-\s\(\)]+"
+                  required
                 />
+                <span class="error-message" aria-live="polite"></span>
               </label>
               <label class="input-group" for="password">
                 <span>Password</span>
@@ -89,8 +94,8 @@
                   placeholder="Enter a strong password"
                   required
                   minlength="8"
-                  pattern="(?=.*[A-Za-z])(?=.*\d).{8,}"
                 />
+                <span class="error-message" aria-live="polite"></span>
               </label>
               <label class="input-group" for="confirm-password">
                 <span>Confirm password</span>
@@ -101,11 +106,12 @@
                   placeholder="Repeat your password"
                   required
                   minlength="8"
-                  pattern="(?=.*[A-Za-z])(?=.*\d).{8,}"
                 />
+                <span class="error-message" aria-live="polite"></span>
               </label>
             </div>
             <button type="submit" class="cta">Create Account</button>
+            <p class="form-feedback" role="status" aria-live="polite"></p>
           </form>
         </section>
         <p class="login-callout">
@@ -113,5 +119,176 @@
         </p>
       </main>
     </div>
+    <script>
+      (function () {
+        'use strict';
+        const form = document.querySelector('.form-section form');
+        if (!form) return;
+
+        const inputs = Array.from(form.querySelectorAll('input'));
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const feedbackEl = form.querySelector('.form-feedback');
+        const passwordInput = form.querySelector('#password');
+        const confirmPasswordInput = form.querySelector('#confirm-password');
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phonePattern = /^[0-9()\-\s]+$/;
+
+        function getValidationMessage(input) {
+          const value = input.value.trim();
+          switch (input.id) {
+            case 'first-name':
+              return value ? '' : 'First name is required.';
+            case 'last-name':
+              return value ? '' : 'Last name is required.';
+            case 'email':
+              if (!value) return 'Email is required.';
+              return emailPattern.test(value)
+                ? ''
+                : 'Enter a valid email address.';
+            case 'phone':
+              if (!value) return 'Phone number is required.';
+              return phonePattern.test(value)
+                ? ''
+                : 'Use numbers, spaces, parentheses or dashes only.';
+            case 'password':
+              if (!value) return 'Password is required.';
+              return value.length >= 8
+                ? ''
+                : 'Password must be at least 8 characters long.';
+            case 'confirm-password':
+              if (!value) return 'Please confirm your password.';
+              return value === (passwordInput ? passwordInput.value : '')
+                ? ''
+                : 'Passwords do not match.';
+            default:
+              return '';
+          }
+        }
+
+        function setGroupState(group, state, message) {
+          if (!group) return;
+          const errorEl = group.querySelector('.error-message');
+          if (state === 'error') {
+            group.dataset.state = 'error';
+            if (errorEl) errorEl.textContent = message;
+          } else if (state === 'success') {
+            group.dataset.state = 'success';
+            if (errorEl) errorEl.textContent = '';
+          } else {
+            group.removeAttribute('data-state');
+            if (errorEl) errorEl.textContent = '';
+          }
+        }
+
+        function updateFieldState(input, { displayMessage = false } = {}) {
+          const message = getValidationMessage(input);
+          const group = input.closest('.input-group');
+          const shouldDisplay =
+            displayMessage ||
+            input.dataset.touched === 'true' ||
+            form.dataset.submitted === 'true';
+
+          if (message) {
+            if (shouldDisplay) {
+              setGroupState(group, 'error', message);
+              input.setAttribute('aria-invalid', 'true');
+            } else {
+              setGroupState(group, null);
+              input.removeAttribute('aria-invalid');
+            }
+            return false;
+          }
+
+          input.removeAttribute('aria-invalid');
+          if (input.value.trim()) {
+            setGroupState(group, 'success');
+          } else {
+            setGroupState(group, null);
+          }
+          return true;
+        }
+
+        function isFormValid() {
+          return inputs.every((input) => getValidationMessage(input) === '');
+        }
+
+        function updateSubmitState() {
+          const valid = isFormValid();
+          submitBtn.disabled = !valid;
+          if (valid) {
+            submitBtn.removeAttribute('aria-disabled');
+          } else {
+            submitBtn.setAttribute('aria-disabled', 'true');
+          }
+        }
+
+        inputs.forEach((input) => {
+          input.addEventListener('input', () => {
+            input.dataset.touched = 'true';
+            updateFieldState(input);
+            if (
+              input.dataset.touched === 'true' ||
+              form.dataset.submitted === 'true'
+            ) {
+              updateFieldState(input, { displayMessage: true });
+            }
+            if (input === passwordInput && confirmPasswordInput) {
+              updateFieldState(confirmPasswordInput);
+              if (
+                confirmPasswordInput.dataset.touched === 'true' ||
+                form.dataset.submitted === 'true'
+              ) {
+                updateFieldState(confirmPasswordInput, { displayMessage: true });
+              }
+            }
+            if (feedbackEl) {
+              feedbackEl.textContent = '';
+            }
+            updateSubmitState();
+          });
+
+          input.addEventListener('blur', () => {
+            input.dataset.touched = 'true';
+            updateFieldState(input, { displayMessage: true });
+            updateSubmitState();
+          });
+        });
+
+        form.addEventListener('submit', (event) => {
+          form.dataset.submitted = 'true';
+          const validity = inputs.map((input) => {
+            input.dataset.touched = 'true';
+            return updateFieldState(input, { displayMessage: true });
+          });
+          const allValid = validity.every(Boolean);
+
+          if (!allValid) {
+            event.preventDefault();
+            const firstInvalid = inputs.find(
+              (input) => getValidationMessage(input) !== ''
+            );
+            if (firstInvalid) {
+              firstInvalid.focus();
+            }
+            updateSubmitState();
+            return;
+          }
+
+          event.preventDefault();
+          if (feedbackEl) {
+            feedbackEl.textContent = 'Success! Your account is ready to go.';
+          }
+          form.reset();
+          inputs.forEach((input) => {
+            delete input.dataset.touched;
+            updateFieldState(input);
+          });
+          delete form.dataset.submitted;
+          updateSubmitState();
+        });
+
+        updateSubmitState();
+      })();
+    </script>
   </body>
 </html>
