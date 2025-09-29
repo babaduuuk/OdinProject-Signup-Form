@@ -243,6 +243,7 @@
             }
             if (feedbackEl) {
               feedbackEl.textContent = '';
+              feedbackEl.removeAttribute('data-state');
             }
             updateSubmitState();
           });
@@ -264,6 +265,10 @@
 
           if (!allValid) {
             event.preventDefault();
+            if (feedbackEl) {
+              feedbackEl.textContent = 'Please fix the highlighted fields.';
+              feedbackEl.dataset.state = 'error';
+            }
             const firstInvalid = inputs.find(
               (input) => getValidationMessage(input) !== ''
             );
@@ -277,13 +282,16 @@
           event.preventDefault();
           if (feedbackEl) {
             feedbackEl.textContent = 'Success! Your account is ready to go.';
+            feedbackEl.dataset.state = 'success';
           }
           form.reset();
+          delete form.dataset.submitted;
           inputs.forEach((input) => {
             delete input.dataset.touched;
-            updateFieldState(input);
+            const group = input.closest('.input-group');
+            setGroupState(group, null);
+            input.removeAttribute('aria-invalid');
           });
-          delete form.dataset.submitted;
           updateSubmitState();
         });
 
@@ -292,3 +300,4 @@
     </script>
   </body>
 </html>
+
